@@ -8,7 +8,7 @@ namespace cphinx {
 	public:
 		void run(auto & fx, const std::string & name) {
 			this->validators.push_back(validator{name});
-			fx(this->validators.back());
+			return fx(this->validators.back());
 		}
 
 
