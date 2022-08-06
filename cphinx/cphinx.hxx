@@ -81,9 +81,11 @@ namespace cphinx {
 		return true;
 	}
 
-	#define CPHINX_TEST(FUNC, NAME)\
-		void FUNC(::cphinx::validator & validator);\
+	#define CPHINX_TEST(NAME)\
+		void NAME(::cphinx::validator & validator);\
 		namespace internal {\
-			inline const auto dummy##_##FUNC = ::cphinx::auto_run(FUNC, NAME);\
-		}
+			inline const auto dummy##_##NAME = ::cphinx::auto_run(NAME, #NAME);\
+		}\
+		inline void NAME(::cphinx::validator & validator) 
+
 }
