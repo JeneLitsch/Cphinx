@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include <ostream>
+#include <iostream>
 #include "validator.hxx"
 
 namespace cphinx {
@@ -61,4 +62,28 @@ namespace cphinx {
 		}
 		std::vector<validator> validators;
 	};
+
+
+	namespace internal {
+		inline cphinx & get_framework() {
+			struct AutoDestroy {
+				AutoDestroy() { std::ios_base::Init(); }
+				cphinx framework;
+				~AutoDestroy() { framework.dignostics(std::cout); }
+			};
+			static AutoDestroy framework;
+			return framework.framework;
+		}
+	}
+
+	bool auto_run(auto & test, const std::string & name) {
+		internal::get_framework().run(test, name);
+		return true;
+	}
+
+	#define CPHINX_TEST(FUNC, NAME)\
+		void FUNC(::cphinx::validator & validator);\
+		namespace internal {\
+			inline const auto dummy##_##FUNC = ::cphinx::auto_run(FUNC, NAME);\
+		}
 }
