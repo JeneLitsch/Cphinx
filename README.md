@@ -72,7 +72,7 @@ ERRORS FOUND!!!
 Tests can also be run automatically. Just declare a test like this.
 The validator is accessable inside the body of the test.
 ```cpp
-CPHINX_TEST(accu_stack_empty_size) {
+CPHINX_TEST(name) {
 	// test code goes her
 }
 ```
