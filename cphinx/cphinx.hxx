@@ -82,10 +82,10 @@ namespace cphinx {
 	}
 
 	#define CPHINX_TEST(NAME)\
-		void NAME(::cphinx::validator & validator);\
+		void NAME(::cphinx::validator & cphinx);\
 		namespace internal {\
 			inline const auto dummy##_##NAME = ::cphinx::auto_run(NAME, #NAME "\n  at " __FILE__ ":" + std::to_string(__LINE__) + "\n " );\
 		}\
-		inline void NAME(::cphinx::validator & validator) 
+		inline void NAME(::cphinx::validator & cphinx) 
 
 }
